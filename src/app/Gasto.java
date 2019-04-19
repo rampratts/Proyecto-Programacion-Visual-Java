@@ -3,7 +3,7 @@ package app;
 import java.time.LocalDateTime;
 
 public class Gasto {
-    public static Double balance;
+    public static Double balance = 0.0;
     private String nombre;
     private Double valor;
     private Boolean esGasto;
@@ -30,5 +30,15 @@ public class Gasto {
 
     public LocalDateTime getFechaDeCreacion() {
         return this.fechaDeCreacion;
+    }
+
+    public Double actualizarBalance() {
+        if (this.esGasto) {
+            Gasto.balance -= this.valor;
+        } else {
+            Gasto.balance += this.valor;
+        }
+
+        return Gasto.balance;
     }
 }
