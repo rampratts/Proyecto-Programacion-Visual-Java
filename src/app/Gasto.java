@@ -1,6 +1,7 @@
 package app;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Gasto {
     public static Double balance = 0.0;
@@ -34,11 +35,9 @@ public class Gasto {
         return this.esGasto;
     }
 
-    public LocalDateTime getFechaDeCreacion() {
-        return this.fechaDeCreacion;
-    }
+    public String getFechaDeCreacion() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public Double getBalance() {
-        return Gasto.balance;
+        return formatter.format(this.fechaDeCreacion);
     }
 }

@@ -6,13 +6,13 @@ import java.time.LocalDateTime;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class NuevoGastoFrame extends JFrame {
+    private static final long serialVersionUID = 1L;
     private JLabel nuevoImporteLabel, nombreLabel, valorLabel, esGastoLabel;
     private JTextField nombreField, valorField;
     private JCheckBox esGasto;
@@ -44,6 +44,7 @@ public class NuevoGastoFrame extends JFrame {
         panel.add(esGastoLabel);
 
         esGasto = new JCheckBox();
+        esGasto.setSelected(true);
         panel.add(esGasto);
 
         agregarButton = new JButton("Agregar importe");
@@ -51,7 +52,7 @@ public class NuevoGastoFrame extends JFrame {
         panel.add(agregarButton);
 
         cancelarButton = new JButton("Cancelar");
-
+        cancelarButton.addActionListener(new CancelarAction());
         panel.add(cancelarButton);
 
         add(panel);
@@ -64,10 +65,9 @@ public class NuevoGastoFrame extends JFrame {
 
             Gasto nuevoGasto = new Gasto(nombre, valor, this.esGasto.isSelected(), LocalDateTime.now());
             MainFrame.agregarGasto(nuevoGasto);
-            for (Gasto item : MainFrame.getGastos()) {
-                System.out.println(item.getNombre());
-                System.out.println(Gasto.balance);
-            }
+            MainFrame.actualizarTabla(nuevoGasto);
+            MainFrame.balanceLabel.setText("Balance: " + Gasto.balance);
+            MainFrame.frame.dispose();
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println("Error al agregar gasto");
@@ -78,6 +78,11 @@ public class NuevoGastoFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
             agregarGasto();
         }
+    }
 
+    class CancelarAction implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            MainFrame.frame.dispose();
+        }
     }
 }

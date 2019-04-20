@@ -1,7 +1,5 @@
 package app;
 
-import java.time.LocalDateTime;
-
 import javax.swing.JFrame;
 
 public class App {
