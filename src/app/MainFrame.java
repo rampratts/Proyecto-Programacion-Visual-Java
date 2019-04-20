@@ -2,6 +2,7 @@ package app;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +12,7 @@ import javax.swing.JPanel;
 public class MainFrame extends JFrame {
     private JLabel balanceLabel;
     private JButton nuevoGastoButton;
+    private static ArrayList<Gasto> gastos = new ArrayList<Gasto>();
 
     public MainFrame() {
         setTitle("Seguidor de gastos");
@@ -27,6 +29,14 @@ public class MainFrame extends JFrame {
         panel.add(nuevoGastoButton);
 
         add(panel);
+    }
+
+    public static void agregarGasto(Gasto nuevoGasto) {
+        gastos.add(nuevoGasto);
+    }
+
+    public static ArrayList<Gasto> getGastos() {
+        return gastos;
     }
 
     class AbrirGastoFrame implements ActionListener {
