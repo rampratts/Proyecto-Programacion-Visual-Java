@@ -14,6 +14,12 @@ public class Gasto {
         this.valor = valor;
         this.esGasto = esGasto;
         this.fechaDeCreacion = fechaDeCreacion;
+
+        if (this.esGasto) {
+            Gasto.balance -= this.valor;
+        } else {
+            Gasto.balance += this.valor;
+        }
     }
 
     public String getNombre() {
@@ -32,13 +38,7 @@ public class Gasto {
         return this.fechaDeCreacion;
     }
 
-    public Double actualizarBalance() {
-        if (this.esGasto) {
-            Gasto.balance -= this.valor;
-        } else {
-            Gasto.balance += this.valor;
-        }
-
+    public Double getBalance() {
         return Gasto.balance;
     }
 }

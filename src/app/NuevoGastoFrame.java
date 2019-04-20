@@ -66,6 +66,7 @@ public class NuevoGastoFrame extends JFrame {
             MainFrame.agregarGasto(nuevoGasto);
             for (Gasto item : MainFrame.getGastos()) {
                 System.out.println(item.getNombre());
+                System.out.println(Gasto.balance);
             }
         } catch (Exception e) {
             // TODO: handle exception
