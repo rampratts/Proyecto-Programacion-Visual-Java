@@ -1,5 +1,7 @@
 package app;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,9 +26,12 @@ public class MainFrame extends JFrame {
     public static DefaultTableModel tableModel;
 
     public MainFrame() {
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension d = tk.getScreenSize();
         setTitle("Seguidor de gastos");
         setResizable(false);
         setSize(400, 500);
+        setLocation(d.width / 3, d.height / 5);
 
         panel = new JPanel();
 

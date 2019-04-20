@@ -1,5 +1,8 @@
 package app;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
@@ -8,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -19,9 +23,12 @@ public class NuevoGastoFrame extends JFrame {
     private JButton agregarButton, cancelarButton;
 
     public NuevoGastoFrame() {
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension d = tk.getScreenSize();
         setTitle("Agregar nuevo importe");
         setSize(300, 400);
         setResizable(false);
+        setLocation(d.width / 3, d.height / 5);
 
         JPanel panel = new JPanel();
 
@@ -67,10 +74,17 @@ public class NuevoGastoFrame extends JFrame {
             MainFrame.agregarGasto(nuevoGasto);
             MainFrame.actualizarTabla(nuevoGasto);
             MainFrame.balanceLabel.setText("Balance: " + Gasto.balance);
+
+            if (Gasto.balance < 0.0) {
+                MainFrame.balanceLabel.setForeground(Color.red);
+            } else if (Gasto.balance >= 0.0) {
+                MainFrame.balanceLabel.setForeground(Color.GREEN);
+            }
+
             MainFrame.frame.dispose();
         } catch (Exception e) {
-            // TODO: handle exception
-            System.out.println("Error al agregar gasto");
+            JOptionPane.showMessageDialog(null, "Error al agregar el nuevo importe. Por favor verifique los datos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
